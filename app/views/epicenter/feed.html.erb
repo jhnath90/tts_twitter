@@ -3,10 +3,15 @@
 
 
 <div>
-    <% @following_tweets.each do |tweet| %>
-        <div>
-	    <p>@<%= tweet.user.username %></p>
-	    <p><%= tweet.message.html_safe %></p>
-	</div>
-    <% end %>
+  <% @following_tweets.each do |tweet| %>
+  <div class="well">
+    <p>
+      <%= image_tag tweet.user.avatar.url, class: "user-pic-nav" %>
+      <%= link_to tweet.user.name, epicenter_show_user_path(id: tweet.user_id) %>
+      @<%= link_to tweet.user.username, epicenter_show_user_path(id: tweet.user_id) %>
+      <%= time_ago_in_words(tweet.created_at) %>
+    </p>
+    <p><%= tweet.message.html_safe %></p>
+  </div>
+<% end %>
 </div>
